@@ -1,0 +1,38 @@
+name: Kit request
+description: Suggest a new kit or a feature for an existing one.
+labels: ["kit request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for a new interface or a feature you would like to see? Describe it below. Upvote existing requests instead of opening duplicates.
+  - type: dropdown
+    id: type
+    attributes:
+      label: Request type
+      options:
+        - New kit
+        - Feature for an existing kit
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What should it do, and what kind of game would use it?
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Screenshots, videos or links to games that show the idea.
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: Target platforms
+      multiple: true
+      options:
+        - PC
+        - Mobile
+        - Console

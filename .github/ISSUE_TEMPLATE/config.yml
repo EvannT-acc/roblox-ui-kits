@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/EvannT-acc/roblox-ui-kits/discussions/categories/q-a
+    about: Need help installing or customizing a kit? Ask in Discussions.
+  - name: Show your game
+    url: https://github.com/EvannT-acc/roblox-ui-kits/discussions/categories/show-and-tell
+    about: Using a kit in your game? Share screenshots and a link.

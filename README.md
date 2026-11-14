@@ -9,6 +9,8 @@ Drop a model into Studio, press Play, and every kit works out of the box.
 [![Luau](https://img.shields.io/badge/Luau-scripts-2C2D72?logo=lua&logoColor=white)](https://luau.org)
 [![Kits](https://img.shields.io/badge/kits-11-brightgreen)](#overview)
 [![Free to use](https://img.shields.io/badge/use-free-success)](#usage)
+[![Release](https://img.shields.io/github/v/release/EvannT-acc/roblox-ui-kits)](https://github.com/EvannT-acc/roblox-ui-kits/releases)
+[![Discussions](https://img.shields.io/github/discussions/EvannT-acc/roblox-ui-kits)](https://github.com/EvannT-acc/roblox-ui-kits/discussions)
 [![Last commit](https://img.shields.io/github/last-commit/EvannT-acc/roblox-ui-kits)](https://github.com/EvannT-acc/roblox-ui-kits/commits/main)
 [![Repo size](https://img.shields.io/github/repo-size/EvannT-acc/roblox-ui-kits)](https://github.com/EvannT-acc/roblox-ui-kits)
 [![Stars](https://img.shields.io/github/stars/EvannT-acc/roblox-ui-kits?style=flat)](https://github.com/EvannT-acc/roblox-ui-kits/stargazers)
@@ -45,6 +47,7 @@ Each kit ships as a single `.rbxm` model in [`kits/`](kits). Every kit has its o
 ### Download the files
 
 - **Everything:** click the green **Code** button at the top of this page, then **Download ZIP**, and extract it.
+- **Latest release:** every kit and the showcase place are attached to the latest [release](https://github.com/EvannT-acc/roblox-ui-kits/releases/latest).
 - **One kit:** open [`kits/`](kits), click the `.rbxm` file you want, then click the **Download raw file** button (arrow icon) at the top right of the file view.
 
 ### Open the files in Roblox Studio
@@ -355,10 +358,26 @@ The included `LimitedStoreDemo` script makes purchases free and keeps stock in m
 | `showcase/showcase.rbxl` | Place with every kit installed |
 | `showcase/showcase-switcher.client.luau` | Key switcher used in the showcase place |
 | `docs/images/` | Screenshots used in this README |
+| `.github/` | Issue templates, contributing guide, code of conduct and security policy |
 
 ## Monetization Notes
 
 Every kit that sells something uses `0` as a placeholder ID. With a `0` ID, purchases are granted for free in Studio so you can test the flow, and the button reports that the item is not set up in a live game. Replace each `0` with your own Developer Product or Game Pass ID from the Creator Dashboard before publishing. The Limited Store is the exception: its demo purchases are always free until you wire it to `MarketplaceService` as described in its section.
+
+## Community
+
+| Want to | Go to |
+| --- | --- |
+| Ask a question or get help with a kit | [Discussions > Q&A](https://github.com/EvannT-acc/roblox-ui-kits/discussions/categories/q-a) |
+| Show a game that uses a kit | [Discussions > Show and tell](https://github.com/EvannT-acc/roblox-ui-kits/discussions/categories/show-and-tell) |
+| Share an idea | [Discussions > Ideas](https://github.com/EvannT-acc/roblox-ui-kits/discussions/categories/ideas) |
+| Report a bug or request a kit | [Open an issue](https://github.com/EvannT-acc/roblox-ui-kits/issues/new/choose) |
+| Improve a kit or the docs | [Contributing guide](.github/CONTRIBUTING.md) |
+| Report a security problem privately | [Security policy](.github/SECURITY.md) |
+
+To be notified when a new kit is released, click **Watch > Custom > Releases** at the top of this page. Every kit is also attached to each [release](https://github.com/EvannT-acc/roblox-ui-kits/releases) for a one-click download.
+
+Everyone taking part is expected to follow the [Code of Conduct](.github/CODE_OF_CONDUCT.md).
 
 ## Usage
 

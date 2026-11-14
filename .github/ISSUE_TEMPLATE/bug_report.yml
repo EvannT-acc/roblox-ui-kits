@@ -1,0 +1,66 @@
+name: Bug report
+description: A kit does not work as described in the README.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem. Please check the install notes for the kit in the README first, most issues come from a piece placed in the wrong service.
+  - type: dropdown
+    id: kit
+    attributes:
+      label: Kit
+      description: Which kit is affected?
+      options:
+        - Main Menu
+        - HUD Kit
+        - Shop and Index Buttons
+        - Square Shine Buttons
+        - Roll and Reward Reveal
+        - Skill Tree
+        - Admin Panel
+        - Nametag Kit
+        - Top Donators
+        - UI Pack
+        - Limited Store
+        - Showcase place
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Insert the kit into StarterGui
+        2. Press Play
+        3. Click ...
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output window
+      description: Copy any errors or warnings from the Studio Output window.
+      render: text
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where does it happen?
+      multiple: true
+      options:
+        - Studio playtest
+        - Live game
+        - Mobile
+        - Console
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or video
+      description: Drag and drop images or a short clip here if it helps.
