@@ -1,0 +1,11 @@
+# Roblox binary files
+*.rbxm binary
+*.rbxl binary
+
+# Images
+*.jpg binary
+*.png binary
+
+# Normalize text files
+*.luau text eol=lf
+*.md text eol=lf
