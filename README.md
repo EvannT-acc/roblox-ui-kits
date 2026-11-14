@@ -8,7 +8,7 @@ Drop a model into Studio, press Play, and every kit works out of the box.
 [![Roblox Studio](https://img.shields.io/badge/Roblox%20Studio-ready-00A2FF?logo=robloxstudio&logoColor=white)](https://create.roblox.com/docs/studio)
 [![Luau](https://img.shields.io/badge/Luau-scripts-2C2D72?logo=lua&logoColor=white)](https://luau.org)
 [![Kits](https://img.shields.io/badge/kits-11-brightgreen)](#overview)
-[![Free to use](https://img.shields.io/badge/use-free-success)](#usage)
+[![License: Unlicense](https://img.shields.io/github/license/EvannT-acc/roblox-ui-kits)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/EvannT-acc/roblox-ui-kits)](https://github.com/EvannT-acc/roblox-ui-kits/releases)
 [![Discussions](https://img.shields.io/github/discussions/EvannT-acc/roblox-ui-kits)](https://github.com/EvannT-acc/roblox-ui-kits/discussions)
 [![Last commit](https://img.shields.io/github/last-commit/EvannT-acc/roblox-ui-kits)](https://github.com/EvannT-acc/roblox-ui-kits/commits/main)
@@ -358,7 +358,8 @@ The included `LimitedStoreDemo` script makes purchases free and keeps stock in m
 | `showcase/showcase.rbxl` | Place with every kit installed |
 | `showcase/showcase-switcher.client.luau` | Key switcher used in the showcase place |
 | `docs/images/` | Screenshots used in this README |
-| `.github/` | Issue templates, contributing guide, code of conduct and security policy |
+| `.github/` | Issue templates, contributing guide, code of conduct, security and accessibility notes |
+| `LICENSE` | The Unlicense (public domain) |
 
 ## Monetization Notes
 
@@ -374,6 +375,7 @@ Every kit that sells something uses `0` as a placeholder ID. With a `0` ID, purc
 | Report a bug or request a kit | [Open an issue](https://github.com/EvannT-acc/roblox-ui-kits/issues/new/choose) |
 | Improve a kit or the docs | [Contributing guide](.github/CONTRIBUTING.md) |
 | Report a security problem privately | [Security policy](.github/SECURITY.md) |
+| Check device and input support | [Accessibility notes](.github/ACCESSIBILITY.md) |
 
 To be notified when a new kit is released, click **Watch > Custom > Releases** at the top of this page. Every kit is also attached to each [release](https://github.com/EvannT-acc/roblox-ui-kits/releases) for a one-click download.
 
@@ -382,6 +384,8 @@ Everyone taking part is expected to follow the [Code of Conduct](.github/CODE_OF
 ## Usage
 
 Every kit is free to use in any game, including commercial projects. Change, extend or restyle anything you like.
+
+The code and assets in this repository are released into the public domain under [The Unlicense](LICENSE). No credit is required. The third-party assets listed below keep their own licenses and terms.
 
 ## Third-Party Assets
 
