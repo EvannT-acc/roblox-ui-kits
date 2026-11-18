@@ -7,7 +7,7 @@ Drop a model into Studio, press Play, and every kit works out of the box.
 
 [![Roblox Studio](https://img.shields.io/badge/Roblox%20Studio-ready-00A2FF?logo=robloxstudio&logoColor=white)](https://create.roblox.com/docs/studio)
 [![Luau](https://img.shields.io/badge/Luau-scripts-2C2D72?logo=lua&logoColor=white)](https://luau.org)
-[![Kits](https://img.shields.io/badge/kits-11-brightgreen)](#overview)
+[![Kits](https://img.shields.io/badge/kits-12-brightgreen)](#overview)
 [![License: Unlicense](https://img.shields.io/github/license/EvannT-acc/roblox-ui-kits)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/EvannT-acc/roblox-ui-kits)](https://github.com/EvannT-acc/roblox-ui-kits/releases)
 [![Discussions](https://img.shields.io/github/discussions/EvannT-acc/roblox-ui-kits)](https://github.com/EvannT-acc/roblox-ui-kits/discussions)
@@ -36,13 +36,14 @@ Each kit ships as a single `.rbxm` model in [`kits/`](kits). Every kit has its o
 | [Top Donators](#top-donators) | [`top-donators.rbxm`](kits/top-donators.rbxm) | Leaderboard of top donors, donate window and world donation effects |
 | [UI Pack](#ui-pack) | [`ui-pack.rbxm`](kits/ui-pack.rbxm) | Complete simulator UI: HUD, store, index, inventory, wheel, rebirth, trading |
 | [Limited Store](#limited-store) | [`limited-store.rbxm`](kits/limited-store.rbxm) | Seasonal limited store with stock counters, card flight and a full card reveal |
+| [Steal Egg Kit](#steal-egg-kit) | [`steal-egg-kit.rbxm`](kits/steal-egg-kit.rbxm) | Egg and pet game UI: Robux shop, trail shop, pet index, fuse machine, sell pets, free gift and a money leaderboard |
 
 ## Getting Started
 
 ### Requirements
 
 - Roblox Studio
-- For kits that save data (HUD Kit, Skill Tree, Admin Panel, Nametag Kit, Top Donators, UI Pack): a **published** game with **Game Settings > Security > Enable Studio Access to API Services** turned on
+- For kits that save data (HUD Kit, Skill Tree, Admin Panel, Nametag Kit, Top Donators, UI Pack, Steal Egg Kit): a **published** game with **Game Settings > Security > Enable Studio Access to API Services** turned on
 
 ### Download the files
 
@@ -103,6 +104,7 @@ Kits that save player data need DataStores in Studio:
 | `8` | Top Donators (walk up to the board and press `E`) |
 | `9` | UI Pack (walk onto a pad) |
 | `M` | Limited Store (click the cart button on the left) |
+| `P` | Steal Egg Kit (walk onto a pad) |
 | `0` | Everything at once |
 | `L` | Toggle the Roblox player list |
 
@@ -350,6 +352,49 @@ A seasonal limited store. A portal opens, three limited cards pop in with live s
 
 The included `LimitedStoreDemo` script makes purchases free and keeps stock in memory only. To sell for real, replace its `Buy` branch with `MarketplaceService:PromptProductPurchase` and a `ProcessReceipt` handler, and save the stock counts in a DataStore.
 
+### Steal Egg Kit
+
+A full interface for an egg and pet game, with the world stalls that open it. The HUD shows money and speed, with Shop and Index buttons, Growing Eggs and Active Pets side panels and a Slow Mode toggle. Behind it are a Robux shop with a limited egg, passes and currency packs, a trail shop that sells speed trails for cash or Robux, a pet index by island, a Fuse Machine, a Sell Pets window, a FREE! gift chest and a MOST MONEY/s leaderboard. Owned trails, the free gift and the leaderboard are saved.
+
+![Steal Egg Kit](docs/images/steal-egg-world.jpg)
+
+| | |
+| --- | --- |
+| ![Steal Egg Kit shop](docs/images/steal-egg-shop.jpg) | ![Steal Egg Kit trail shop](docs/images/steal-egg-trails.jpg) |
+| ![Steal Egg Kit pet index](docs/images/steal-egg-index.jpg) | ![Steal Egg Kit fuse machine](docs/images/steal-egg-fuse.jpg) |
+| ![Steal Egg Kit sell pets](docs/images/steal-egg-sell.jpg) | |
+
+**Install:** the `Steal Egg Kit` model contains five numbered folders. Drag each one into the service it is named after, then **Ungroup** it.
+
+| Folder | Destination | Contents |
+| --- | --- | --- |
+| `1 - Ungroup in StarterGui` | `StarterGui` | `HUD`, `RobuxShop`, `TrailShop`, `GrowingEggs`, `ActivePets`, `PetFuse`, `Index Menu New`, `Sell Pets`, `FreeGift` |
+| `2 - Ungroup in StarterPlayerScripts` | `StarterPlayer > StarterPlayerScripts` | `GameUIController`, `TrailShopClient`, `MoneyBoardClient` |
+| `3 - Ungroup in ServerScriptService` | `ServerScriptService` | `TrailServer`, `FreeGiftServer`, `MoneyLeaderboard` |
+| `4 - Ungroup in ReplicatedStorage` | `ReplicatedStorage` | `TrailSystem` |
+| `5 - Ungroup in Workspace` | `Workspace` | `StealEggWorld` (stalls, pads, Fuse Machine, gift chest, leaderboard) |
+
+Delete what is left of the model (its README script), then press Play. Move `StealEggWorld` anywhere in your map.
+
+**How the world opens the menus:**
+
+- Any part with the attribute `OpenMenu` set to `Trail`, `Sell` or `FreeGift` opens that menu while a player stands on it.
+- Any `ProximityPrompt` with `OpenMenu = "Fuse"` opens the Fuse Machine.
+- The leaderboard fills every `SurfaceGui` named `MoneyBoardGui` in `Workspace`.
+- Other scripts can call `PlayerGui.HUD.OpenMenu:Fire("Shop")` and `PlayerGui.HUD.CloseOpenMenu:Fire()`.
+
+**Customize:**
+
+| What | Where |
+| --- | --- |
+| Robux shop products and passes | `PRODUCTS` at the top of `GameUIController` |
+| Trails: names, cash prices, speed, Robux prices, product IDs | `ReplicatedStorage > TrailSystem > TrailConfig` |
+| Test money when the game has no Money stat | `START_MONEY_FOR_TESTING` in `TrailConfig` (set it to 0 for a live game) |
+| Group check for the free gift | `GROUP_ID` in `FreeGiftServer` (0 = no group check) |
+| Leaderboard stat and refresh rate | `STAT_NAMES` and `REFRESH` in `MoneyLeaderboard` |
+
+The equipped trail sets the player attributes `TrailEquipped` and `TrailMultiplier`, so your own speed code can read them. Sell Pets shows sample pets until your game has a `ReplicatedStorage.EggPetConfig` module, and the Fuse Machine has a marked spot in `GameUIController` (`give the pet here`) to connect your pet system.
+
 ## Repository Structure
 
 | Path | Contents |
@@ -363,7 +408,7 @@ The included `LimitedStoreDemo` script makes purchases free and keeps stock in m
 
 ## Monetization Notes
 
-Every kit that sells something uses `0` as a placeholder ID. With a `0` ID, purchases are granted for free in Studio so you can test the flow, and the button reports that the item is not set up in a live game. Replace each `0` with your own Developer Product or Game Pass ID from the Creator Dashboard before publishing. The Limited Store is the exception: its demo purchases are always free until you wire it to `MarketplaceService` as described in its section.
+Every kit that sells something uses `0` as a placeholder ID. With a `0` ID, purchases are granted for free in Studio so you can test the flow, and the button reports that the item is not set up in a live game. Replace each `0` with your own Developer Product or Game Pass ID from the Creator Dashboard before publishing. The Limited Store is the exception: its demo purchases are always free until you wire it to `MarketplaceService` as described in its section. In the Steal Egg Kit, a Robux button with a `0` ID does nothing until you set its ID, while trails can always be bought with in-game cash.
 
 ## Community
 
@@ -392,3 +437,4 @@ The code and assets in this repository are released into the public domain under
 - UI Pack icons by **@gvesster** (Free Icon Pack and Eggs Icon Pack)
 - Admin commands powered by the **HD Admin** engine. See `Workspace > HD Admin > LICENSE` inside the Admin Panel kit
 - Limited Store sounds are free public Roblox and ProSoundEffects sounds from the Creator Store
+- Steal Egg Kit 3D shop models (stalls, Fuse Machine, gift chest, pad rings, leaderboard stand) use free public assets from the Creator Store

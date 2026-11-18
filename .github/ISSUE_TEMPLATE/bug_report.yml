@@ -23,6 +23,7 @@ body:
         - Top Donators
         - UI Pack
         - Limited Store
+        - Steal Egg Kit
         - Showcase place
     validations:
       required: true

@@ -14,7 +14,7 @@ These kits are meant to work for every player of your game, on every device Robl
 ## Known limitations
 
 - **Gamepad navigation:** menus do not yet support moving between buttons with the D-pad or thumbstick (`GuiService.SelectedObject`). Console players can use buttons that react to gamepad input, but cannot browse every window.
-- **Motion and flashes:** some kits use camera shake, white flashes and fast particle effects (Limited Store reveal, Roll reveal, donation effects). There is no option yet to reduce motion or disable flashes.
+- **Motion and flashes:** some kits use camera shake, white flashes and fast particle effects (Limited Store reveal, Roll reveal, donation effects, Steal Egg Kit spinning shines). There is no option yet to reduce motion or disable flashes.
 - **Safe areas:** most kits do not position themselves around device notches and rounded corners. Check the layout on phones with a notch before publishing.
 - **Screen readers:** Roblox does not expose UI to screen readers, so the kits rely on visual information.
 

@@ -1,5 +1,5 @@
 -- Showcase switcher for screenshots: shows one UI kit at a time.
--- 1 HUD | 2 Shop/Index | 3 Roll | 4 Skill Tree | 5 Admin | 6 Roles/Nametags | 7 Square Shine | 8 Top Donators | 9 UI Pack | M Limited Store | 0 everything
+-- 1 HUD | 2 Shop/Index | 3 Roll | 4 Skill Tree | 5 Admin | 6 Roles/Nametags | 7 Square Shine | 8 Top Donators | 9 UI Pack | M Limited Store | P Steal Egg | 0 everything
 -- L shows / hides the Roblox player list. The main menu is shown alone first; press PLAY to get to the kits.
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
@@ -21,6 +21,13 @@ local MODES = {
 	-- the full UI Pack: its HUD + screens, and walks you to its pads and stalls
 	[Enum.KeyCode.Nine] = { name = "UI Pack (walk onto a pad)", guis = { "UIPack", "Roll" }, standAt = Vector3.new(0, 3, 12), lookAt = Vector3.new(0, 3, 34) },
 	[Enum.KeyCode.M] = { name = "Limited Store (click the button on the left)", guis = { "LimitedStore" } },
+	-- the Steal Egg kit: its HUD and menus, and walks you to its stalls and pads
+	[Enum.KeyCode.P] = {
+		name = "Steal Egg Kit (walk onto a pad)",
+		guis = { "HUD", "RobuxShop", "TrailShop", "GrowingEggs", "ActivePets", "PetFuse", "Index Menu New", "Sell Pets", "FreeGift" },
+		standAt = Vector3.new(-178, 3, -21),
+		lookAt = Vector3.new(-145, 3, -21),
+	},
 	[Enum.KeyCode.Zero] = { name = "Everything", guis = "all" },
 }
 
@@ -30,6 +37,12 @@ local OPEN_KEYS = {
 	[Enum.KeyCode.F2] = MODES[Enum.KeyCode.Five],
 	[Enum.KeyCode.H] = MODES[Enum.KeyCode.Six],
 }
+
+-- kits whose own scripts switch their ScreenGuis on at start: keep them in line with the current mode
+local STICKY_GUIS = {}
+for _, n in MODES[Enum.KeyCode.P].guis do
+	STICKY_GUIS[n] = true
+end
 
 local KIT_GUIS = {}
 for _, mode in MODES do
@@ -109,11 +122,19 @@ local function watchMenu(menu)
 		inMenu = menu.Enabled
 		apply()
 		if wasInMenu and not inMenu then
-			showHint(`Keys 1-9 and M switch kit  |  K / F2 / H open panels  |  0 = everything`)
+			showHint(`Keys 1-9, M and P switch kit  |  K / F2 / H open panels  |  0 = everything`)
 		end
 	end
 	menu:GetPropertyChangedSignal("Enabled"):Connect(update)
 	update()
+end
+
+local function watchSticky(gui)
+	if STICKY_GUIS[gui.Name] then
+		gui:GetPropertyChangedSignal("Enabled"):Connect(function()
+			task.defer(apply)
+		end)
+	end
 end
 
 playerGui.ChildAdded:Connect(function(child)
@@ -124,8 +145,14 @@ playerGui.ChildAdded:Connect(function(child)
 		watchMenu(child)
 	elseif KIT_GUIS[child.Name] then
 		task.defer(apply)
+		watchSticky(child)
 	end
 end)
+for _, child in playerGui:GetChildren() do
+	if child:IsA("ScreenGui") then
+		watchSticky(child)
+	end
+end
 
 local menu = playerGui:FindFirstChild("MainMenu")
 if menu then
@@ -147,6 +174,12 @@ UserInputService.InputBegan:Connect(function(input, processed)
 	end
 	local mode = MODES[input.KeyCode]
 	if mode then
+		-- leaving the Steal Egg kit: close its open menu so its background blur goes too
+		local stealEggHud = playerGui:FindFirstChild("HUD")
+		local closeMenu = stealEggHud and stealEggHud:FindFirstChild("CloseOpenMenu")
+		if closeMenu and mode ~= MODES[Enum.KeyCode.P] and mode.guis ~= "all" then
+			closeMenu:Fire()
+		end
 		current = mode
 		apply()
 		showHint(mode.name)
